@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prince | Health Informatics Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Locomotive Scroll CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #ffbd39;
+      --accent-soft: rgba(255, 189, 57, 0.18);
+      --text-main: #f5f5f5;
+      --text-muted: #a7b0c4;
+      --card-bg: #111727;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --radius-xl: 18px;
+      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: radial-gradient(circle at top, #111827 0, #050816 45%, #02010a 100%);
+      color: var(--text-main);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden; /* Locomotive manages scrolling*/
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 16px 6vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /*backdrop-filter: blur(14px);*/
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 8, 22, 0.9),
+        rgba(5, 8, 22, 0.15),
+        transparent
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .nav__logo {
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(255, 189, 57, 0.9);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 145px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .nav__links a {
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .nav__links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width 0.2s ease-out;
+    }
+
+    .nav__links a:hover::after {
+      width: 100%;
+    }
+
+    /* MAIN SCROLL CONTAINER */
+    [data-scroll-container] {
+      min-height: 100vh;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 96px 6vw 120px;
+      position: relative;
+    }
+
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero__eyebrow {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .hero__title {
+      font-size: clamp(2.8rem, 4.6vw, 3.8rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero__title span {
+      color: var(--accent);
+    }
+
+    .hero__typing {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      min-height: 1.5em;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 80%;
+    }
+
+    .hero__typing::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--accent);
+      animation: cursor 0.8s steps(2) infinite;
+    }
+
+    @keyframes cursor {
+      0%, 50% {
+        opacity: 1;
+      }
+      50.01%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .hero__summary {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+
+    .hero__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(9, 12, 28, 0.9);
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      padding: 10px 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #111;
+      box-shadow: 0 12px 35px rgba(255, 189, 57, 0.55);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--text-main);
+      background: transparent;
+    }
+
+    .hero__right {
+      position: relative;
+    }
+
+    .hero__card {
+      border-radius: 26px;
+      background: radial-gradient(circle at top left, #1f2937, #020617 70%);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.25);
+      color: #a5f3fc;
+      border: 1px solid rgba(34, 211, 238, 0.35);
+    }
+
+    .hero__photo {
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .hero__meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      margin-bottom: 8px;
+    }
+
+    .hero__meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero__meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.75rem;
+      margin-top: 8px;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 2fr);
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      padding: 22px 22px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .about-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .about-list li {
+      margin-bottom: 8px;
+    }
+
+    .about-list span:first-child {
+      display: inline-block;
+      width: 110px;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .skill-pill {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .skill-pill span:last-child {
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    /* EXPERIENCE / EDUCATION */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      padding: 16px 18px 14px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .timeline-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .timeline-item ul {
+      margin-left: 18px;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image img {
+      transition: transform 0.5s ease-out;
+      transform-origin: center;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .project-body {
+      padding: 16px 18px 16px;
+    }
+
+    .project-title {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .project-tagline {
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 6px;
+    }
+
+    .project-body p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .contact-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .contact-list li {
+      margin-bottom: 12px;
+    }
+
+    .contact-list span:first-child {
+      display: inline-block;
+      width: 90px;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .contact-cta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .social-pill {
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    footer {
+      padding: 20px 6vw 26px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: #020617;
+    }
+
+    footer span {
+      color: #e5e7eb;
+    }
+
+    /* IN-VIEW ANIMATIONS (Locomotive adds .is-inview) */
+    [data-scroll] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    [data-scroll].is-inview {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 120px;
+      }
+
+      .hero__right {
+        order: -1;
+      }
+
+      .about-grid,
+      .two-col,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section {
+        padding: 96px 6vw 90px;
+      }
+
+      .nav {
+        padding-inline: 4vw;
+      }
+
+      .nav__links {
+        gap: 12px;
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav__links {
+        display: none;
+      }
+
+      .hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+/* PROJECTS - make all card images the same size */
+.project-image{
+  aspect-ratio: 16 / 9;      /* or 4 / 3 if you prefer */
+  width: 100%;
+  overflow: hidden;
+  background: #0b1020;       /* shows while image loads */
+}
+
+.project-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* fills area, crops a bit */
+  object-position: center;
+  display: block;
+}
+
+/* HERO background (subtle glow + faint dot grid) */
+#hero{
+  overflow: hidden; /* keeps blobs from spilling out */
+}
+
+#hero::before{
+  content: "";
+  position: absolute;
+  inset: -35%;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero__photo img{
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* HERO cover image (image-only with soft overlay + fade) */
+.hero__cover{
+  position: relative;
+  height: clamp(320px, 44vh, 520px);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-soft);
+  background: #0b1020;
+}
+
+.hero__cover img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.9;
+  filter: saturate(1.4) contrast(1.1);
+  transform: scale(1.02);
+}
+
+/* overlay that “blends” the photo into the dark UI */
+.hero__cover::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    /* dark fade from left so text side stays clean */
+    linear-gradient(90deg,
+      rgba(5, 8, 22, 0.92) 0%,
+      rgba(5, 8, 22, 0.55) 35%,
+      rgba(5, 8, 22, 0.25) 70%,
+      rgba(5, 8, 22, 0.35) 100%
+    ),
+    /* subtle glow accents */
+    radial-gradient(circle at 30% 20%, rgba(42, 41, 57, 0.18), transparent 55%),
+    radial-gradient(circle at 75% 65%, rgba(28, 34, 35, 0.1), transparent 60%);
+}
+
+/* optional: soft edge fade (nice on Chrome/Safari) */
+.hero__cover{
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, transparent 100%);
+}
+
+@media (max-width: 960px){
+  .hero__cover{ height: 280px; }
+}
+
+.hero__right{ padding-top: 8px; }
+
+.section-inner{max-width:none}
+h3{margin-bottom:10px}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+   <!-- <div class="nav__logo">
+      <span class="nav__dot"></span> PRINCE MASIH
+    </div>-->
+    <nav class="nav__links">
+      <a href="#hero" data-scroll-to>Home</a>
+      <a href="#about" data-scroll-to>About</a>
+      <a href="#experience" data-scroll-to>Experience</a>
+      <a href="#projects" data-scroll-to>Projects</a>
+      <a href="#contact" data-scroll-to>Contact</a>
+    </nav>
+  </header>
+
+  <!-- SCROLL CONTAINER -->
+  <main data-scroll-container>
+
+    <!-- HERO -->
+    <section id="hero" data-scroll-section>
+      <div class="section-inner hero">
+        <div class="hero__left" data-scroll data-scroll-speed="1.2">
+          <!--<div class="hero__eyebrow">Health Informatics </div>-->
+          <h1 class="hero__title">
+            Hi, I’m <span>Prince</span><br />
+            building a bridge between<br />care, data & workflows.
+          </h1>
+
+          <div class="hero__typing" id="typing-text">
+            Business analysis, workflow mapping, and a QA mindset.',
+  'Open to Winter 2026 co-op and internship roles.
+          </div>
+
+          <p class="hero__summary">
+           I’m pursuing a Postgraduate Certificate in Health Informatics at George Brown College, with a foundation in
+  Computer Applications. I focus on workflow mapping, assessment and LMS design, and practical documentation that
+  supports clinicians and operations teams. My background includes quality assurance, team leadership, and web
+  development, and I’m building stronger skills in data handling and privacy (PHIPA).  
+          </p>
+
+          <!--<div class="hero__pills">
+            <span class="pill">Health Informatics Postgraduate</span>
+            <span class="pill">Business Analysis & Workflow Mapping</span>
+            <span class="pill">Assessment & LMS Design</span>
+            <span class="pill">QA Mindset</span>
+          </div>-->
+
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn-primary" data-scroll-to>Let’s Connect</a>
+           <!-- <a href="Prince_Amicare.pdf" class="btn btn-outline" target="_blank" rel="noopener">
+              Download CV </a>-->
+          </div>
+        </div>
+
+        <div class="hero__right" data-scroll data-scroll-speed="2">
+        <div class="hero__cover">
+        <img src="images/prince.jpg" alt="Prince"/>
+  </div>
+</div>
+
+        </div>
+
+         
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" data-scroll-section>
+      <div class="section-inner">
+        <p class="section-label" data-scroll>About</p>
+        <h2 class="section-title" data-scroll>Who I am and how I work</h2>
+        <p class="section-subtitle" data-scroll>
+          I’m building a career in health informatics where I can connect technical teams, clinicians and
+          operations. I like making things clear: mapping flows, writing simple explanations, and turning
+          “we should fix this” into concrete actions.
+        </p>
+
+        <div class="about-grid">
+          <div class="card" data-scroll data-scroll-speed="1.3">
+            <h3>Quick profile</h3>
+            <ul class="about-list">
+              <li><span>Focus</span> <span>Health Informatics, Business Analysis, QA</span></li>
+              <li><span>Current</span> <span>Health Informatics (Postgrad), George Brown College</span></li>
+              <li><span>Background</span> <span>QA Chef (HACCP), Assistant Manager, Web Developer</span></li>
+              <li><span>Tools</span> <span>Excel, basic SQL, Python (pandas), Figma, LMS, JIRA-style tools</span></li>
+              <li><span>Strengths</span> <span>Workflows, clear documentation, steady under pressure</span></li>
+            </ul>
+          </div>
+
+          <div class="card" data-scroll data-scroll-speed="0.8">
+            <h3>Skills snapshot</h3>
+            <div class="skills-grid">
+              <div class="skill-pill">
+                <span>Business Analysis & Workflows</span><span>●●●●○</span>
+              </div>
+              <div class="skill-pill">
+                <span>Software / Platform Testing</span><span>●●●●○</span>
+              </div>
+              <div class="skill-pill">
+                <span>Privacy & Compliance Basics</span><span>●●●○○</span>
+              </div>
+              <div class="skill-pill">
+                <span>Excel & basic SQL</span><span>●●●○○</span>
+              </div>
+              <div class="skill-pill">
+                <span>Python (pandas)</span><span>●●○○○</span>
+              </div>
+              <div class="skill-pill">
+                <span>UX thinking (Figma)</span><span>●●●○○</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE & EDUCATION -->
+    <section id="experience" data-scroll-section>
+      <div class="section-inner">
+        <p class="section-label" data-scroll>Experience</p>
+        <h2 class="section-title" data-scroll>What I’ve done so far</h2>
+        <p class="section-subtitle" data-scroll>
+          I’ve worked in quality assurance, food service leadership and web development. Each role taught
+          me something that now fits into health informatics: consistency, documentation, teamwork,
+          and thinking about the real user at the end of the process.
+        </p>
+
+        <div class="two-col">
+          <div data-scroll data-scroll-speed="1.1">
+            <h3>Professional experience</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">Feb 2023 – Aug 2023</div>
+                <div class="timeline-title">Quality Assurance Chef (HACCP Certified)</div>
+                <div class="timeline-org">Hart and Ziel</div>
+                <ul>
+                  <li>Coordinated HACCP controls, logged non-conformances, and supported fixes to keep audits on track.</li>
+                  <li>Standardized SOPs and forms to make compliance checks and documentation easier to follow.</li>
+                  <li>Researched gluten-free certifying bodies and prepared the application and evidence package.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date">Mar 2019 – Jan 2023</div>
+                <div class="timeline-title">Assistant Manager</div>
+                <div class="timeline-org">South Street Burger, Toronto, ON</div>
+                <ul>
+                  <li>Led teams during rush hours and kept service standards consistent under pressure.</li>
+                  <li>Handled customer issues calmly and clearly, focusing on fair resolutions.</li>
+                  <li>Helped organize tasks and staffing so the day-to-day work ran smoothly.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date">Jan 2018 – Apr 2018</div>
+                <div class="timeline-title">Co-op Web Developer</div>
+                <div class="timeline-org">Web Vertical Domains, Mississauga, ON</div>
+                <ul>
+                  <li>Translated client requests into simple written specs with annotated screenshots.</li>
+                  <li>Maintained a basic change log to track approvals and updates across small projects.</li>
+                  <li>Raised timeline risks early when content or assets were missing.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div data-scroll data-scroll-speed="0.8">
+            <h3>Education & certifications</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">May 2025 – Present</div>
+                <div class="timeline-title">Postgraduate Certificate, Health Informatics</div>
+                <div class="timeline-org">George Brown College, Toronto</div>
+                <ul>
+                  <li>Managing assessment and evaluation in an LMS: mapped flows from outcomes to rubrics, assignments and gradebook.</li>
+                  <li>Wrote a SNOMED CT brief explaining how point-of-care terminology maps to ICD for reporting and billing.</li>
+                  <li>Designed a self-serve specimen drop-off kiosk flow and Figma UI for labels and deposit steps.</li>
+                  <li>Won a case challenge designing an AI voice companion for seniors with clear caregiver alerts.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date">2016 – 2018</div>
+                <div class="timeline-title">PG Diploma, Mobile Application Design & Development</div>
+                <div class="timeline-org">Lambton College, Toronto, ON</div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date">2011 – 2014</div>
+                <div class="timeline-title">Master of Computer Application</div>
+                <div class="timeline-org">SHIATS, India</div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date">2007 – 2010</div>
+                <div class="timeline-title">Bachelor of Computer Application</div>
+                <div class="timeline-org">Guru Nanak Dev University, India</div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-date">Selected certifications</div>
+                <ul>
+                  <li>Python for Health Sciences and Healthcare – LinkedIn Learning</li>
+                  <li>Privacy, Governance &amp; Compliance – Data Classification &amp; Data Sharing</li>
+                  <li>CIHI courses: MIS Standards Intro, Using CIHI Indicators, Intro to CIHI Tools & Data</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" data-scroll-section>
+      <div class="section-inner">
+        <p class="section-label" data-scroll>Projects</p>
+        <h2 class="section-title" data-scroll>Work that reflects how I think</h2>
+        <p class="section-subtitle" data-scroll>
+          These projects show how I approach problems: clarify the goal, map the flow, and design something
+          people can actually use, whether they are clinicians, students, or patients.
+        </p>
+
+        <div class="projects-grid">
+          <article class="project-card" data-scroll data-scroll-speed="1.1">
+            <div class="project-image">
+              <img src="images/learning-management-system.png" alt="LMS assessment project" />
+            </div>
+            <div class="project-body">
+              <div class="project-tagline">LMS • Assessment Design</div>
+              <h3 class="project-title">Managing Assessment & Evaluation in an LMS</h3>
+              <p>
+                Documented stakeholder needs, defined scope and assumptions, and mapped how learning outcomes
+                connect to rubrics, assignments, quizzes and gradebook settings in a learning management system.
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card" data-scroll data-scroll-speed="0.9">
+            <div class="project-image">
+              <img src="https://www.echima.ca/wp-content/uploads/2020/06/SNOMED-CT-foundation-e1595596764919.webp" alt="SNOMED CT project" />
+            </div>
+            <div class="project-body">
+              <div class="project-tagline">Clinical Terminology</div>
+              <h3 class="project-title">SNOMED CT Adoption Brief</h3>
+              <p>
+                Wrote a clinician-facing memo explaining what SNOMED CT is, why it matters at the point of care,
+                and how it maps to ICD codes to support reporting, funding and quality measures.
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card" data-scroll data-scroll-speed="0.95">
+  <div class="project-image">
+    <img src="images/UX-Design-UI-Design_@3x-1-scaled-3.jpg" alt="UX UI project" />
+  </div>
+  <div class="project-body">
+    <div class="project-tagline">UX • UI • Patient Flow</div>
+    <h3 class="project-title">Digital Intake and Consent (UX / UI)</h3>
+    <p>
+      Mapped a patient intake flow from check-in to confirmation, then created simple UI screens with clear wording,
+      error states, and accessibility-friendly layout choices.
+    </p>
+  </div>
+</article>
+
+          <article class="project-card" data-scroll data-scroll-speed="0.8">
+            <div class="project-image">
+              <img src="images/vecteezy_ai-generated.jpg" alt="AI voice companion" />
+            </div>
+            <div class="project-body">
+              <div class="project-tagline">Case Challenge • Seniors</div>
+              <h3 class="project-title">AI Voice Companion for Seniors</h3>
+              <p>
+                In a 3-hour challenge, helped define an AI voice assistant concept for seniors that combined
+                reminders, gentle engagement and caregiver alerts, then delivered a focused demo path.
+              </p>
+            </div>
+          </article>
+          <article class="project-card" data-scroll data-scroll-speed="1.05">
+  <div class="project-image">
+    <img src="images/db-management-sys.png" alt="Database project" />
+  </div>
+  <div class="project-body">
+    <div class="project-tagline">Database • SQL • Data Modeling</div>
+    <h3 class="project-title">Healthcare Services Directory Database</h3>
+    <p>
+      Designed a clean relational schema for service centres, validated fields, and built SQL queries to support
+      search, reporting, and duplicate detection. Focused on data quality rules and clear documentation.
+    </p>
+  </div>
+</article>
+
+<article class="project-card" data-scroll data-scroll-speed="1.0">
+  <div class="project-image">
+    <img src="images/1759158637817.jpg" alt="PHIPA implementation project" />
+  </div>
+
+  <div class="project-body">
+    <div class="project-tagline">Privacy • PHIPA • Governance</div>
+    <h3 class="project-title">PHIPA Implementation and Privacy Controls</h3>
+    <p>
+      Developed a practical PHIPA-aligned approach for handling personal health information, including role-based
+      access, audit logging, consent and disclosure rules, breach response steps, and staff training notes. Added a
+      simple Privacy Impact Assessment checklist to document risks and mitigations.
+    </p>
+  </div>
+</article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" data-scroll-section>
+      <div class="section-inner">
+        <p class="section-label" data-scroll>Contact</p>
+        <h2 class="section-title" data-scroll>Let’s talk</h2>
+        <p class="section-subtitle" data-scroll>
+          I’m open to internship, co-op, and entry-level roles in health informatics, business analysis,
+          or related areas. If you think I could be a good fit for your team, I’d be happy to connect.
+        </p>
+
+        <div class="contact-grid">
+          <div class="card" data-scroll data-scroll-speed="1.2">
+            <h3>Details</h3>
+            <ul class="contact-list">
+              <li><span>Location</span> <span>Milton, Ontario, Canada</span></li>
+              <li><span>Email</span> <span><a href="mailto:prince4@georgebrown.ca">prince4@georgebrown.ca</a></span></li>
+              <li><span>Phone</span> <span><a href="tel:+16472726213">+1 (647) 272-6213</a></span></li>
+              <li><span>Resume</span> <span><a href="Prince_Amicare.pdf" target="_blank">Download PDF</a></span></li>
+            </ul>
+          </div>
+
+          <div data-scroll data-scroll-speed="0.8">
+            <p class="contact-cta">
+              I like roles where I can sit between people and systems: talking with users, mapping what’s
+              really happening, and helping to shape features, tests and documentation that actually help.
+            </p>
+            <p class="contact-cta">
+              If you’d like, you can email me directly or connect on LinkedIn and I’ll respond as soon as I can.
+            </p>
+            <div class="social-row">
+              <a class="social-pill" href="www.linkedin.com/in/prince-mca8757" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="social-pill" href="#" target="_blank" rel="noopener">GitHub</a>
+              <a class="social-pill" href="https://www.behance.net/prince-mca" target="_blank" rel="noopener">Behance</a>
+            </div> 
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer data-scroll-section>
+      <div>
+        <span>Prince Masih</span> &nbsp;·&nbsp; Health Informatics &amp; Business Analysis &nbsp;·&nbsp;
+        <span id="year"></span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Locomotive Scroll JS -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+  <script>
+    // Init Locomotive Scroll
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector('[data-scroll-container]'),
+      smooth: true,
+      smartphone: { smooth: true },
+      tablet: { smooth: true }
+    });
+
+    // Make nav links scroll smoothly using data-scroll-to
+    document.querySelectorAll('[data-scroll-to]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (!target) return;
+        scroll.scrollTo(target);
+      });
+    });
+
+    // Typing effect in hero (simpler than GSAP version)
+    const typingElement = document.getElementById('typing-text');
+    const typingTexts = [
+      'Health Informatics postgraduate student at George Brown.',
+      'Interested in business analysis, workflows & LMS design.',
+      'Open to Winter 2026 internship opportunities.'
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
+
+    function typeLoop() {
+      const current = typingTexts[textIndex];
+      typingElement.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === current.length) {
+        setTimeout(() => {
+          charIndex = 0;
+          textIndex = (textIndex + 1) % typingTexts.length;
+          typeLoop();
+        }, 1800);
+      } else {
+        setTimeout(typeLoop, 60);
+      }
+    }
+    typeLoop();
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
